@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %} {% block content %}
+<title>Profile{{ user.userprofile.picture }}</title>
+
+<div class="container">
+    <div class="col-xs-12">
+        {% if messages %} {% for message in messages%}
+        <div class="" role="alert">
+            <center>{{ message }}</center>
+        </div>
+        {% endfor %} {% endif %}
+    </div>
+    <h1>Profile</h1>
+    <p>Username: {{ user }}</p>
+    <p>First name: {{ user.userprofile.first_name}}</p>
+    <p>Last name: {{ user.userprofile.last_name }}</p>
+    <p>Age: {{ user.userprofile.age }}</p>
+    <p>Hobbies: {{ user.userprofile.hobbies }}</p>
+    <p>Favorite category: {{ user.userprofile.favcategory }}</p>
+    <p>Coins: {{ user.userprofile.coins }} </p>
+    <p><img class="profile-image center-block img-circle" width="100px" height="100px" align="left" src="../../media/{{ user.userprofile.picture }}" alt="profile picture" /></p>
+</div>
+<div class="container">
+    <center><input type="button" class="btn btn-warning" value="Home" onclick="location.href = 'http://localhost:8000/home';"></center>
+</div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base/base.html' %} {% block content %}
+
+<div class="container">
+    <center>
+        <div class="row">
+            <div class="col-md-12">
+                <img src="../../static/img/quizfun.png" class="img-responsive img-rounded" alt="Quiz" />
+                <h5>Welcome to QuizFun! <a href="http://localhost:8000/profile">{{ user.get_username }}</a></h5>
+                <p>Win coins answering questions ;)</p>
+                <p>{{message}}</p>
+                <input type="button" class="btn btn-info" value="Answer quizzes" onclick="location.href = 'http://localhost:8000/questions/ask_question';">
+                <input type="button" class="btn btn-info" value="Answer predictions" onclick="location.href = 'http://localhost:8000/predictions/list';">
+                <input type="button" class="btn btn-info" value="Ranking" onclick="location.href = 'http://localhost:8000/ranking/ranking_menu';">
+            </div>
+        </div>
+    </center>
+</div>
+
+{% endblock %}

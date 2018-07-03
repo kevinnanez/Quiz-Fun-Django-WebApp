@@ -1,0 +1,27 @@
+{% extends 'base/base.html' %} {% block content %}.
+<center>
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Coins</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for u in all_users %}
+                    <tr class="success">
+                        <td><a href="http://localhost:8000/ranking/userprofile/{{u.id}}">{{u.username}}</a></td>
+                        <td>{{u.coins}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+        <input type="button" class="btn btn-warning" value="Home" onclick="location.href = 'http://localhost:8000/home';">
+    </div>
+</center>
+
+{% endblock %}

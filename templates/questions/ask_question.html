@@ -1,0 +1,93 @@
+{% extends 'base/base.html' %} {% block content %}
+<div class="container">
+    <div class="row">
+        <h1 id="counter">
+        </div>
+        <div class="row">
+        <h1>
+        <div class="form-group">
+        <fieldset class="form-group">
+            <legend>{{ question.question }}</legend>
+                {% for a in answers %}
+            <div class="form-check">
+            <label class="form-check-label" id ={{a.id}}>
+                <input type="radio" class="form-check-input" name="option" id='option{{a.id}}' value='{{a.id}}'>
+                {{a.answer}}
+            </label>
+            </div>
+                {% endfor %}
+            </div>
+          </fieldset>
+        </div>
+          <button id="submit" class="btn btn-primary">Submit</button>
+          <div class="form-group" align="right">
+        <p><span class="glyphicon glyphicon-thumbs-down">Cost: {{ question.cost }}</p>
+        <p><span class="glyphicon glyphicon-thumbs-up">Reward: {{ question.reward }}</p>
+        <p><span class="glyphicon glyphicon-th-large">Category: {{ question.category }}</p>
+        <p><span class="glyphicon glyphicon-fire">Dificulty: {{ question.dificulty }}</p></div><span style="padding-right:3px; padding-top: 3px; display:inline-block;">
+        </img>
+        </span>
+        <div id="extrabottom"></div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+
+    $("#submit").click(function () {
+      var radio = $('input[name="option"]:checked').val();
+      var question = {{question.id}};
+      clearInterval(counterdecrease);
+
+      $.ajax({
+        url: '/questions/answer_question/',
+        data: {
+          'question': question,
+          'option': radio,
+          'user': {{user.id}}
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_correct) {
+            $("#counter").text("Correct :D!! you win {{question.reward}} coins");
+            $("#"+$('input[name="option"]:checked').val()).css("background-color","green");
+          }else{
+            $("#counter").text("Wrong answer :'v!! you lost {{question.cost}} coins");
+            $("#"+$('input[name="option"]:checked').val()).css("background-color","red");
+          }
+        }
+
+      });
+      $("#submit").prop('disabled', true);
+          buildbutton();
+
+    });
+
+        var counter = {{question.time}};
+        var counterdecrease = setInterval(function() {
+        counter--;
+        $("#counter").text(counter+"Time remaining");
+        if(counter == 0){
+            clearInterval(counterdecrease);
+            $("#submit").prop('disabled', true);
+            $("#counter").text("Time's up :(");
+            buildbutton();
+
+        }
+    }, 1000);
+
+        function buildbutton(){
+            $("#extrabottom").append('<input type="button" class="btn btn-info" value="Ask for another quiz" '
+            +' onclick="location.href = \'http:\/\/localhost:8000/questions/ask_question\';\">'
+            +'<input type="button" class="btn btn-info" value="Back to home" '
+            +' onclick="location.href = \'http:\/\/localhost:8000/home\';\">');
+
+
+
+
+
+        }
+
+  </script>
+</div>
+
+{% endblock %}

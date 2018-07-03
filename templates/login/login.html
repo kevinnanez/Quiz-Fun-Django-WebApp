@@ -1,0 +1,85 @@
+{% extends 'base/base.html' %} {% block content %}
+
+<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-info">
+            <div class="panel-heading">User login</div>
+            <div class="panel-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="form-group">
+                                <label>Username: </label>
+                                <input id="username" class="form-control" type="text" name="username" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="form-group">
+                                <label> Password: </label>
+                                <input class="form-control" type="password" id="password" name="password" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="form-group">
+                                <button class="btn btn-primary" id="boton_submit" type="submit"> Sign in </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+    $("#username").change(function() {
+        var username = $(this).val();
+
+        $.ajax({
+            url: '/login/validate_username/',
+            data: {
+                'username': username
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (!data.is_taken) {
+                    alert("Usuario invalido.");
+                    $("#boton_submit").prop('disabled', true);
+                } else {
+                    $("#boton_submit").prop('disabled', false);
+
+                }
+            }
+        });
+
+    });
+
+    $("#password").change(function() {
+        var password = $(this).val();
+        var username = $("#username").val();
+
+        $.ajax({
+            url: '/login/validate_password/',
+            data: {
+                'username': username,
+                'password': password
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (!data.match) {
+                    alert("Wrong password!");
+                    $("#boton_submit").prop('disabled', true);
+                } else {
+                    $("#boton_submit").prop('disabled', false);
+
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

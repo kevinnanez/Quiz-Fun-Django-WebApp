@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %} {% block content %}
+<div class="container">
+    Available question list
+    <div class="container">
+        <br> {% for q in all_questions %}
+        <div class="row">
+            <div class="col-md-8 md-offset-4">
+
+                <div class="col-md-10 md-offset-4">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Question</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <td><input type="button" class="btn btn-default" value="{{ q.question }}" onclick="location.href = 'http://localhost:8000/questions/{{q.id}}';"></td>
+                            <td>Cost: {{ q.cost }} <span style="padding-right:3px; padding-top: 3px; display:inline-block;"></span> Reward: {{ q.reward }} <span style="padding-right:3px; padding-top: 3px; display:inline-block;"></span> Limit: {{ q.end_time
+                                }} <span style="padding-right:3px; padding-top: 3px; display:inline-block;"></span></td>
+                </div>
+            </div>
+        </div>
+        <br> {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

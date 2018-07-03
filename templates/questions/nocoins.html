@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %} {% block content %}
+<div class="container">
+    <center>
+        <div class="row">
+            <div class="col-md-12">
+                <img src="../../static/img/quizfun.png" class="img-responsive img-rounded" alt="Quiz" />
+                <h5>Welcome to QuizFun! <a href="http://localhost:8000/profile">{{ user.get_username }}</a></h5>
+                <p> You need 10 coins to answer a question. You have <span>
+        <img class="manImg" src="../../static/img/coin2.png" width="15"></img></span> {{ request.user.userprofile.coins }}</p>
+                <p> {{message}} <span><br>
+      <input type="button" class="btn btn-danger" value="Back to home" onclick="location.href = 'http://localhost:8000/home';">
+    </div>
+</div>
+</center>
+</div>
+
+{% endblock %}

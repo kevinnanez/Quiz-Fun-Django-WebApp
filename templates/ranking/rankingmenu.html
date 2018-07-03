@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %} {% block content %}
+<div class="container">
+    <center>
+        <div class="row">
+            <div class="col-md-12">
+                <img src="../../static/img/quizfun.png" class="img-responsive img-rounded" alt="Quiz" />
+                <h5>Select the ranking you want to see</h5>
+                <input type="button" class="btn btn-warning" value="Month" onclick="location.href = 'http://localhost:8000/ranking/ranking_mensual';">
+                <input type="button" class="btn btn-warning" value="Global" onclick="location.href = 'http://localhost:8000/ranking/ranking_global';">
+            </div>
+        </div>
+    </center>
+</div>
+
+{% endblock %}

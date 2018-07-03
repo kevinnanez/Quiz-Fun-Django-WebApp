@@ -1,0 +1,80 @@
+{% extends 'base/base.html' %} {% block content %}
+<div class="container">
+    <div class="row">
+        <h1 id="counter">
+        </div>
+        <div class="row">
+        <h1>
+        <div class="form-group">
+        <fieldset class="form-group">
+            <legend>{{ prediction.prediction }}</legend>
+                {% for a in answers %}
+            <div class="form-check">
+            <label class="form-check-label" id ={{a.id}}>
+                <input type="radio" class="form-check-input" name="option" id='option{{a.id}}' value='{{a.id}}'>
+                {{a.answer}}
+            </label>
+            </div>
+                {% endfor %}
+            </div>
+          </fieldset>
+        </div>
+          <input type="text" class="form-check-input" name="bet" id="bet">
+          <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+        Reward: {{ prediction.reward }} <span style="padding-right:3px; padding-top: 3px; display:inline-block;">
+        <img class="manImg" src="../../static/img/span2.png"></img>
+        </span>
+        <div id="botonesextra"></div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+
+    $("#submit").click(function () {
+      var bet = $("#bet").val();
+      if(bet > 0 && bet <= {{user.userprofile.coins}}) {
+      var radio = $('input[name="option"]:checked').val();
+      var prediction = {{prediction.id}};
+
+      //alert(question+"---"+radio+"---"+{{user.id}})
+      $.ajax({
+        url: '/predictions/bet_prediction/',
+        data: {
+          'prediction': prediction,
+          'option': radio,
+          'user': {{user.id}},
+          'bet': bet,
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.ok) {
+            $("#counter").text("Your answer has been saved :D!");
+            $("#"+$('input[name="option"]:checked').val()).css("background-color","green");
+          }else{
+            $("#counter").text("ERROR: your answer has not been saved :c");
+            $("#"+$('input[name="option"]:checked').val()).css("background-color","red");
+          }
+        }
+
+      });
+      $("#submit").prop('disabled', true);
+          armarbotones();
+      }else if(bet > {{user.userprofile.coins}}){
+            alert("You can't bet more coins than you currently have!");
+      }else {
+        alert("Debe ingresar un monto para poder apostar!!");
+      }
+    });
+
+
+        function armarbotones(){
+            $("#botonesextra").append('<input type="button" class="btn btn-info" value="Back to prediction list" '
+            +' onclick="location.href = \'http:\/\/localhost:8000/predictions/list\';\">'
+            +'<input type="button" class="btn btn-info" value="Back to home" '
+            +' onclick="location.href = \'http:\/\/localhost:8000/home\';\">');
+        }
+
+  </script>
+</div>
+
+{% endblock %}

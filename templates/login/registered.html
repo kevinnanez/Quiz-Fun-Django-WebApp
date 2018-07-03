@@ -1,0 +1,14 @@
+ {% extends 'base/base.html' %} {% block content %}
+<div class="container">
+    <center>
+        <div class="row">
+            <div class="col-md-12">
+                <h5><a href="http://localhost:8000/profile">{{ user.get_username }}</a> Your account was successfuly created </h5>
+
+                <input type="button" class="btn btn-info" value="Start" onclick="location.href = 'http://localhost:8000/home';">
+            </div>
+        </div>
+    </center>
+</div>
+
+{% endblock %}

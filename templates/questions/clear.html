@@ -1,0 +1,19 @@
+{% extends 'base/base.html' %} {% block content %}
+
+<div class="container">
+    <center>
+        <div class="container" style="background-color:powderblue;">
+            <p>Notifications cleared. <a href="http://localhost:8000/home">Volver al home</a></p>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <img src="../../static/img/quizfun.png" class="img-responsive img-rounded" alt="Quiz" />
+                <h5>Welcome to QuizFun! <a href="http://localhost:8000/profile">{{ user.get_username }}</a></h5>
+                <p>Win coins answering questions ;)</p>
+                <input type="button" class="btn btn-info" value="Solve quizzes" onclick="location.href = 'http://localhost:8000/preguntas/ask_question';">
+            </div>
+        </div>
+    </center>
+</div>
+
+{% endblock %}

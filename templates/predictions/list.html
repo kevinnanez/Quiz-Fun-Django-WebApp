@@ -1,0 +1,65 @@
+{% extends 'base/base.html' %} {% block content %}
+<div class="container">
+    Categories
+    <div class="container">
+        <div class="row">
+            <input type="button" class="btn btn-info" value="History" onclick="location.href = 'http://localhost:8000/predictions/list?cat=H';">
+            <input type="button" class="btn btn-info" value="Geography" onclick="location.href = 'http://localhost:8000/predictions/list?cat=G';">
+            <input type="button" class="btn btn-info" value="Science" onclick="location.href = 'http://localhost:8000/predictions/list?cat=SC';">
+            <input type="button" class="btn btn-info" value="Sports" onclick="location.href = 'http://localhost:8000/predictions/list?cat=SP';">
+            <input type="button" class="btn btn-info" value="Art" onclick="location.href = 'http://localhost:8000/predictions/list?cat=A';">
+            <input type="button" class="btn btn-info" value="Entertainment" onclick="location.href = 'http://localhost:8000/predictions/list?cat=E';">
+            <input type="button" class="btn btn-info" value="All" onclick="location.href = 'http://localhost:8000/predictions/list';">
+        </div>
+    </div>
+
+</div>
+<div class="container">
+    <table class="table">
+        Available prediction list
+        <div class="container">
+            <p>{{message}}</p>
+            <br> {% for q in all_predictions %}
+            <div class="row">
+                <div class="col-md-8 md-offset-4">
+
+                    <div class="col-md-10 md-offset-4">
+                        <thead>
+                            <tr>
+                                <th>Prediction</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <td>
+                                {% if user.userprofile.coins > 0 %}
+                                <input type="button" class="btn btn-default" value="{{ q.prediction }}" onclick="location.href = 'http://localhost:8000/predictions/prediction?id={{q.id}}';"> {% else %}
+                                <input type="button" class="btn btn-default" value="{{ q.prediction }}" disabled> {% endif %}
+                            </td>
+                            <td>Reward: {{ q.reward }} <span style="padding-right:3px; padding-top: 3px; display:inline-block;"></span> Limit: {{ q.end_time }} <span style="padding-right:3px; padding-top: 3px; display:inline-block;"></span></td>
+                            Difficulty: {{ q.dificulty }} <span style="padding-right:3px; padding-top: 3px; display:inline-block;"></span></td>
+                        </tbody>
+                        <p></p>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <p>Answered predictions</p>
+                                        <tbody>
+                                            {% for a in all_answered %}
+                                            </p>
+                                            <td>{{ a.prediction }}</td>
+                                            </p>
+                                            {% endfor %}
+                                        </tbody>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br> {% endfor %}
+        </table>
+</div>
+
+</div>
+
+{% endblock %}

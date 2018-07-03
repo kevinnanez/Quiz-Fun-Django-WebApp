@@ -1,2 +1,5 @@
-# Quiz-Fun-Django-WebApp
-Quiz Fun es un juego de preguntas y respuestas. Desarrollado en Python y Django
+WebApp en Python y Django. Trabajo de laboratorio de la materia Ingeniera del Software 1
+
+Como correr el server: 
+
+python runserver manage.py

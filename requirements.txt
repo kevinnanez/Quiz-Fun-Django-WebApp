@@ -1,0 +1,9 @@
+Django==1.11.6
+Pillow==4.3.0
+argparse==1.2.1
+coverage==3.6
+django-crontab==0.7.1
+django-multiselectfield==0.1.8
+olefile==0.44
+pytz==2017.2
+wsgiref==0.1.2
